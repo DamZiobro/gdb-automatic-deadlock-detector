@@ -2,7 +2,7 @@
 gdb-automatic-deadlock-detector
 =======
 
-Script allowing automatically detect C/C++ thread locking and deadlocks in GDB debugger. 
+Script adds new GDB command which automatically detects C/C++ thread lockups and deadlocks in GDB debugger. 
 
 **It automates process of deadlock detection described in this instruction**:
 https://en.wikibooks.org/wiki/Linux_Applications_Debugging_Techniques/Deadlocks
