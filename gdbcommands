@@ -1,0 +1,7 @@
+python 
+import gdbDisplayLockedThreads
+end
+
+thread apply all bt
+
+blocked
