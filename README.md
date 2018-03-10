@@ -19,6 +19,8 @@ Thread: 7960 waits for thread: 7959 AND DEADLOCKED
 Thread: 7959 waits for thread: 7960 AND DEADLOCKED
 ********************************************************************************
 ```
+It means that thread 7960 waits for mutex holded by thread 7959 AND thread 7959 
+waits for mutex holded by thread 7960 - so threas 7959 and 7960 are deadlocked
 
 
 Preparing sample deadlocked app
@@ -92,7 +94,7 @@ Thread: 7959 waits for thread: 7960 AND DEADLOCKED
 ********************************************************************************
 ```
 
-It means that thread 7960 waits for mutex holded by thread 7959 AND thread 27185 
+It means that thread 7960 waits for mutex holded by thread 7959 AND thread 7959 
 waits for mutex holded by thread 7960 - so threas 7959 and 7960 are deadlocked
 
 4. Now you can detect deadlock for any core using this quick gdb command from
