@@ -55,6 +55,8 @@ Usage
    (**notice import our Python script gdbDisplayLockedThreads and invoking 'blocked' command**):
 ```
 python 
+import sys
+sys.path.append('.')
 import gdbDisplayLockedThreads
 end 
 thread apply all bt 
