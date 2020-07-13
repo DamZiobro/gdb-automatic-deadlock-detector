@@ -64,14 +64,13 @@ class DisplayLockedThreads(gdb.Command):
                 frame = gdb.selected_frame()
                 while frame:
                     frame.select()
-                    #print("   {0}".format(frame.name()))
                     name = frame.name()
                     if name is None:
                         name = "??"
                     if "pthread_mutex_lock" in name:
                         trd.waitOnThread = int(gdb.execute("print mutex.__data.__owner", to_string=True).split()[2])
                         #print(threads[-1].waitOnThread)
-                    trd.frames.append(frame.name())
+                    trd.frames.append(name)
                     frame = frame.older()
                 threads[trd.threadId] = trd
 
