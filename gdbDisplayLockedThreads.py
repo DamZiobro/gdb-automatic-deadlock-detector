@@ -65,7 +65,10 @@ class DisplayLockedThreads(gdb.Command):
                 while frame:
                     frame.select()
                     #print("   {0}".format(frame.name()))
-                    if "pthread_mutex_lock" in frame.name():
+                    name = frame.name()
+                    if name is None:
+                        name = "??"
+                    if "pthread_mutex_lock" in name:
                         trd.waitOnThread = int(gdb.execute("print mutex.__data.__owner", to_string=True).split()[2])
                         #print(threads[-1].waitOnThread)
                     trd.frames.append(frame.name())
@@ -74,7 +77,10 @@ class DisplayLockedThreads(gdb.Command):
 
         for (tid,thread) in threads.items():
             if thread.waitOnThread:
-                deadlockedText = "" if not threads[thread.waitOnThread].waitOnThread == thread.threadId else "AND DEADLOCKED"
+                if thread.waitOnThread in threads and threads[thread.waitOnThread].waitOnThread == thread.threadId:
+                    deadlockedText = "AND DEADLOCKED"
+                else:
+                    deadlockedText = ""
                 print ("Thread: {0} waits for thread: {1} {2}".format(thread.threadId, thread.waitOnThread, deadlockedText))
         print ("********************************************************************************")
 
